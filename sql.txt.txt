@@ -1,0 +1,1235 @@
+use office;
+drop table deptt;
+drop database office;
+create database office;
+use office;
+create table dept(
+d_id int primary key,
+d_name varchar(10) not null,
+e_role varchar(10)
+);
+create table emp(
+e_id int primary key,
+e_name varchar(10) not null,
+e_role varchar(20),
+e_sal decimal(8,2) check(e_sal>= 15000),
+e_dno int,
+foreign key(e_dno) references dept(d_id)
+);
+insert into dept values
+ ( 10,"accoumting","newyork"),
+ (20,"sales","chicago"), 
+ (30,"developers","dalas"),
+ (40,"operation","boston");
+ 
+ insert into emp values
+(7369,"smith","clerk",800,500,7902,"1980-12-17",20),
+(7499,"allen","salesman",1600,300,7698,"1981-02-20",30),
+(7521,"ward","salesman",1250,500,7902,"1981-02-22",30),
+(7566,"jones","manager",2975,500,7839,"1981-04-02",20),
+(7654,"martin","salesman",1250,1400,7698,"1981-09-28",30),
+(7698,"blake","manager",2850,2000,7839,"1981-05-01",30),
+(7782,"clark","manager",2450,1500,7831,"1980-06-09",10),
+(7788,"scott","analyst",3000,1200,7566,"1987-04-19",20),
+(7839,"king","president",5000,1300,500,"1981-11-17",10),
+(7844,"turner","salesman",1500,"0",7698,"1981-09-08",30),
+(7876,"adams","clerk",1100,1090,7788,"1987-05-23",20),
+(7900,"james","clerk",950,450,7698,"1981-12-03",30),
+(7902,"ford","analyst",3000,1200,7566,"1981-12-03",20),
+(7934,"miller","clerk",1300,400,7782,"1982-01-23",10);
+
+create table emp(
+ empno int primary key,
+ ename varchar(10) not null,
+ job varchar(10),
+ sal int,
+ comm int,
+ mgr int,
+ hiredate date,
+ dno int,
+ foreign key(dno) references dept(d_id) );
+ alter table dept
+ rename column e_role to location;
+  alter table dept
+  rename  column d_id to deptno;
+  
+  update emp
+set comm=null
+where ename in ("smith","allen","ward","jones","martin","salesman","manger","manger","analyst","president","salesman","clerk","clerk","analyst""clerk");
+
+select ename
+from emp
+where comm is null;
+ update emp
+set mgr=null
+where ename="king";
+
+select ename
+from emp
+where mgr is null;
+
+select job,ename,dno
+from emp
+where  dno=30 and job="salesman";
+
+select ename,job,sal
+from emp
+where dno=30 and job="salesman" and sal>1500;
+
+select ename
+from emp
+where ename like 's%' or ename like 'a%';
+
+select ename,dno
+from emp
+where dno not in (10,20);
+
+select ename
+from emp
+where ename not like 's%';
+
+select ename,dno
+from emp
+where dno=10 and mgr is not null;
+select ename,comm
+from emp
+where comm is null and job="clerk";
+
+select ename,dno
+from emp
+-- where mgr is null and (dno=10 or dno=20);
+where mgr is null and dno in(10,20);
+
+select *
+from emp
+where deptno=30 and job="salesman" and sal>2450;
+
+select *
+from emp
+where job='analysr' and dno=20 and sal>2500;
+
+select *
+from emp
+where ename like 'm%' or ename like 'j%';
+
+select ename,sal*12,annual_salary
+from emp
+where dno<>30;
+
+select ename 
+from emp
+where ename not like '%es' or ename not like '%r';
+
+select *
+from emp
+where dno=10 and mgr is not null and sal='10%';
+
+select *
+from emp
+where job='salesman' and ename like '%e_' and sal like '____';
+
+select *
+from emp
+where hiredate>'31-12-1981';
+
+select *
+from emp
+where month(hiredate)='02';
+
+select *
+from emp
+where dno in(10,20) and job not in('mgr','clerk') and sal=1000 and 3000;
+
+use sample;
+select name,city,country
+from customers
+where country="france";
+
+select name,id
+from customers
+where id between 20 and 50;
+
+select name,contact,country
+from customers
+where country in ('germany' or 'brazil');
+
+select name
+from customers
+where name  like 'a%';
+
+select *
+from customers
+where country  not in ('USA');
+
+select *
+from customers
+where city="london";
+
+select *
+from customers
+where country in ("france","germany","italy");
+
+select*
+from customers
+where id>60 and country='usa';
+
+select *
+from customers
+where postal_code="";
+
+select *
+from customers
+where name like '%market%';
+
+select *
+from customers
+where city in ("mardi","paris","london");
+
+select *
+from customers
+where name like "%market%";
+
+select *
+from customers
+where country="brazil" and city="SÃ£o Paulo";
+
+select *
+from customers
+where id<25;
+
+select *
+from customers
+where country not like "france";
+
+select *
+from customers
+where country='uk';
+
+select *
+from customers
+where id between 70 and 90 and country='germany';
+
+select*
+from customers
+where name like 'b%' or name like 'c%';
+
+select*
+from customers
+where country in('usa','canada');
+
+select*
+from customers
+where postal_code is not null;
+
+select*
+from customers
+where country in('london','uk');
+
+select*
+from customers
+where id is not null and name is not null and country is not null;
+
+select*
+from customers
+where name like '%store';
+
+select*
+from customers
+where id in(10,20,30,40,50);
+
+select*
+from customers
+where id>30 and country in ('germany');
+
+select*
+from customers
+where city like 'm%';
+
+select*
+from customers
+where country not in ('germany','france');
+
+select*
+from customers
+where country in ('brazil','argentina','mexico');
+
+select*
+from customers
+where name like '%a%' and country in('france');
+
+select*
+from customers
+-- where name is not null and country in ('italy');
+where country in('italy');
+
+select*
+from customers
+where id  not between 30 and 40;
+
+select*
+from customers
+-- where postal_code is not null and country in('usa');
+where country in('usa');
+
+select*
+from customers
+where country ='germany' and city='berlin';
+
+select*
+from customers
+where name like 'm%';
+
+select*
+from customers
+where id>=75;
+
+select*
+from customers
+where city in('madrid','barcelona');
+
+select*
+from customers
+where country not in('usa');
+
+select*
+from customers
+where name like 'a%' and country in('germany');
+
+select*
+from customers
+where id between 1 and 2;
+
+select*
+from customers
+where country in('uk','france');
+
+select*
+from customers
+where name like '%restaurant%';
+
+select*
+from customers
+where country in('usa','uk','canada');
+
+select*
+from customers
+where id>40 and id<80; 
+
+select*
+from customers
+where postal_code is null or country in('ireland'); 
+
+select*
+from customers
+where name is not null and country in('brazil');
+
+select*
+from customers
+where name like 'c%' or 'd%' and country in ('germany','france');
+
+select*
+from customers
+where name  like '%store%' or '%market%';
+
+select*
+from customers
+where country='mexico' AND city='México D.F.';
+
+select*
+from customers
+where country in('germany','france','usa') and city <> 'london';
+
+select ename, length(ename)
+from emp;
+
+select ename, length(ename)
+from emp
+where length(ename)=6;
+
+select ename, length(ename)
+from emp
+where ename='smith';
+
+select length('smith')
+from dual;
+
+select  length('ganga')
+from dual;
+
+select concat('mr.',ename)
+from emp;
+
+select concat('mr. ',ename,'earning salary of',sal,'rupeess')
+from emp
+where ename in ('king','jones','allen');
+
+select upper('HYedrabad')
+from emp;
+
+select lower(ename)
+from emp;
+
+select lower('HYedrabad') output
+from dual;
+
+select reverse('hYedrabad')
+from emp;
+
+
+select substr('gangadhar',1,5)output
+from emp;
+
+select substr('gangadhar',0,5)output
+from emp;
+
+select substr('gangadhar',7)output
+from emp;
+
+select substr('gangadhar',-2,5)output
+from emp;
+
+select substr('gangadhar',-8) output
+from emp;
+
+select ename
+from emp
+where ename like 'a%' or ename like 'e%' or 
+ename like 'i%' or ename like 'o%' or ename like 'u%';
+
+select ename
+from emp
+where substr(ename,1,1) in ('a','e','i','o','u');
+-- name 1st half
+select ename,substr(ename,1,length(ename)/2) output
+from emp;
+-- name 2nd half
+select ename,substr(ename,length(ename)/2+1) output
+from emp;
+
+select ename,substr(ename,1,3)output
+from emp;
+
+select substr(ename,-3)output
+from emp;
+
+use office;
+select instr(ename,'a')
+from emp;
+
+select ename
+from emp
+where instr(ename,'a')>0;
+
+select ename
+from emp
+where instr(ename,'a')=2;
+
+select replace('banana','a','f')output
+from dual;
+
+select replace('anna','n','m')output
+from dual;
+
+select replace('engineering','e','')output
+from dual; 
+
+select replace('engineering','e','143')output
+from dual;
+
+select ename
+from emp
+where length(ename)-length(replace(lower(ename),'a',''))=2;
+
+select length('malayalam')-length(replace('malayalam','a',''))output
+from dual;
+
+----- syntax: mod(m,n);
+
+select mod(5,2)output
+from dual;
+use office;
+
+select ename,sal
+from emp
+where mod(sal,3)=0;
+
+select *
+from emp 
+where mod(empno,2)=1;
+
+select ename,ascii(ename) output
+from emp;
+select ascii('s')
+from dual;
+
+
+-- syntax: char_length(string)
+
+select ename,length(ename)output
+from emp;
+
+-- the format() function formats anumber to a format like #,###,###.##
+
+-- syntax: concat_ws('string1','string2',....)
+
+select concat_WS(",","hello","world","welcome","to mysql")
+from dual;
+
+-- syntax: fromat(number,decimal_places);
+select format(7255605991.5689, 3)output
+from dual;
+
+select insert('my favorite criketer is ' ,20,1,'peddi sri')output
+from dual;
+
+select lcase('ganga')output
+from dual;
+
+select ucase('ganga')output
+from dual;
+
+select left("hello world",5)output
+from dual;
+
+-- syntax: repeat(string,number);
+
+select repeat('msql ',5)output
+from dual;
+
+-- SYNTAX: rpad('original string', length, rpad_string)
+-- lpad('original string',lpad_string)
+
+select rpad('my sql' ,25,'class')
+from dual;
+
+select lpad('my sqlllll' ,25,'class')
+from dual;
+
+-- trim() it is used remove sopaces on left and right side
+-- syntax: trum('string')
+
+select length('  ganga  ')-length(trim('  ganga  '))output
+from  dual;
+
+select ltrim('  string  ')output
+from dual;
+
+-- syntax: strcmp('string1','string2');
+
+select strcmp('my sql','my sql')output
+from dual;
+
+-- syntax: sub string(string,start,length)
+
+use office;
+-- syntax:abs(number)
+select abs(-243.56)output
+from dual;
+-- syntax:ceil(number)
+select ceil(35.55)output
+from dual;
+select ceiling(35.55)output
+from dual;
+
+-- syntax:floor(number)
+select floor(35.99)
+from dual;
+
+-- date function
+-- date command: sysdate,current_date
+-- sysdate():it returns date and time by default
+
+-- syntax : sysdate():
+ select sysdate()output
+ from dual;
+ 
+ -- the current_date() function returns the current_date.
+ -- (numeric).
+ 
+ -- note:the date is returns as "YYY-MM-DD" (string) or as YYYMMDD
+ -- (numeric)
+
+-- note: this function equals the curent()function.
+-- syntax : curent_time() or cuetime()
+
+select current_time()output
+from dual;
+
+select curtime()output
+from dual;
+
+-- if curent date us functions name is curent
+
+-- the curent_timestamp() function returns the current date and time .
+
+-- note: the date and time is returned as 	"YYY-MM-DD HH-MM-SS"
+
+-- SYNTAX : Current_timestamp()
+
+select current_timestamp() output
+from dual;
+
+-- the batediff() function returns the number of days between
+-- two dtaes
+-- syntax: datediff(date1,date2)
+
+
+select datediff("2026-09-01","2026-08-26")output
+from dual;
+
+select ename,current_date, datediff(current_date(),hiredate)
+from emp;
+
+-- tahe date_add() function adds a time/date intervel to a
+-- date and then returns the date.
+ -- syntax: date_add(date,interval value addunit)
+ 
+ select date_add(sysdate(),interval 10 day)
+ from dual;
+ 
+ select date_add(sysdate(),interval 10 month)
+ from dual;
+ 
+ -- syntax: date_format(date,format)
+ 
+ select date_format(current_date(),"%b")output
+ from dual;
+ -- %c numeric month name(0 to 12)
+ 
+ select date_format(current_date(),"%c")output
+ from dual;
+ 
+ use office;
+select from_days(772669)
+from dual;
+
+select to_days(sysdate())output
+from dual;
+
+select hour("12:33:45")output
+from dual;
+
+select hour("00:33:45")output
+from dual;
+
+select hour("892:33:45")output																																																																														select last_day(sysdate())outout
+from dual;
+
+select last_day("2016-04-22")outout
+from dual;
+
+select makedate(2026,100)output
+from dual;
+
+select microsecond("2017-03-3 08:23:00.999999")output
+from dual;
+
+select maketime(11,22,33)output
+from dual;
+
+-- the week() function returns the week number for  a given date (a nummber from 0 to 53)
+
+-- syntax:weeka(dte)
+
+select week("2000-03-04")output
+from dual;
+
+select year("2026-10-02")
+from dual;
+
+select max(sal),min(sal)
+from emp;
+-- waqtd maximum salary given to a manager.
+select max(sal)
+from emp
+where job='manager';
+
+-- waqtd total salary given to dept 10
+
+select min(sal),max(sal),count(sal),avg(sal)
+from emp;
+
+select sum(sal)
+from emp;
+
+select count(*)
+from emp;
+
+-- waqtd number of employee having 'e' in their names.
+
+select count(*)
+from emp
+where ename like '%e%';
+
+
+select min(sal)
+from emp
+where job='clerk' and dno in (10,20);
+
+select count(*)
+from emp
+where hiredate between '1983-01-01' and '1984-12-31' and dno in (10,30);
+
+select count(*)
+from emp
+where comm is not null;
+
+select count(comm)
+from emp;
+
+select max(sal)
+from emp
+where ename='%s%' and job='manager' and dno='10' and sal<1800;
+
+select dno,count(*)
+from emp
+group by dno;
+
+select count(*),job,dno
+from emp
+where job!='analyst' group by job,dno;
+
+select max(sal),job
+from emp
+group by job;
+
+select count(*),job
+from emp
+where ename like'%A%' group by job;
+
+select count(*),dno,count(comm)
+from emp
+where comm is not null
+group by dno;
+
+select count(*),dno
+from emp
+where job<>'president'
+group by dno;
+
+select count(*),job
+from emp
+group by job;
+
+select count(*),dno
+from emp
+where job='manager'
+group by dno;
+
+select avg(sal),dno
+from emp
+where dno<>20
+group by dno;
+
+select count(*),job
+from emp
+where ename like '%A%'
+group by job;
+
+select count(*),avg(sal),dno
+from emp
+where sal>2000
+group by dno;
+
+select count(*),sum(sal),job
+from emp
+where job='salesman'
+group by job;
+
+select count(*),max(sal),job
+from emp
+group by job;
+
+select dno,max(sal)
+from emp
+group by dno;
+
+select count(*)
+from emp
+where sal is not null;
+
+-- having class
+
+select count(*),dno
+from emp
+group by dno
+having count(*)>4;
+
+select count(*),job
+from emp
+group by job
+having count(*)>=2;
+
+select sal,count(sal)
+from emp
+group by sal
+having count(sal)>1;
+
+select hiredate,count(hiredate)
+from emp
+group by hiredate
+having count(hiredate)=2;
+
+select count(*),dno
+from emp
+where ename like '%A%' or ename like '%S%'
+group by dno
+having count(*)>=2;
+
+select count(*),dno
+from emp
+where job='clerk'
+group by dno
+having count(*)>=2;
+
+select dno,sum(sal),count(*)
+from emp
+where sal is not null
+group by dno
+having count(*)>=4;
+
+select count(sal),job,sum(sal)
+from emp
+where sal>1200
+group by job
+having sum(sal)>3800;
+
+select dno,count(*)
+from emp
+where job='manager'
+group by dno
+having count(dno)<=2;
+
+select job,max(sal)
+from emp
+group by job
+having max(sal)>2600;
+
+select count(*),sal
+from emp
+group by sal
+having count(sal)>=1;
+
+select hiredate,count(hiredate)
+from emp
+group by hiredate
+having count(hiredate)!=1;
+
+select dno,ename
+from emp
+where ename like '%A%' or ename like '%S%'
+group by dno
+having dno>3;
+use office;
+select dno,avg(sal)
+group by job
+having min(sal)>1000 and max(sal)<5000;
+
+
+-- waqtd empname and sal who is erning more than allen
+select ename,sal
+from emp 
+where sal>(select sal
+            from emp
+            where ename='allen');
+            
+-- waqtd name and salary of the empoloyees earning less than miller
+
+select ename,sal 
+from emp
+where sal<(select sal 
+from emp
+where ename='miller');
+
+-- waqtd name and hiredate of the employees if the employee was hire after jones
+
+select ename,hiredate
+from emp
+where hiredate>(select hiredate
+from emp
+where ename='jones');
+
+
+select *
+from emp
+where job=(select job
+from emp
+where ename='king');
+
+select ename,sal,dno
+from emp
+where sal>200 and dno=(select dno
+from emp
+where ename='james');
+
+select *
+from emp
+where sal<1500 and job=(select job
+from emp
+where ename='miller');
+
+select *
+from emp
+where  sal>(select sal
+from emp
+where ename='smith') and sal<(select sal
+from emp
+where ename='king');
+
+select ename,sal
+from emp
+where sal>(select sal
+from emp
+where ename='adams');
+
+select ename,sal
+from emp
+where sal<(select sal
+from emp
+where  ename='king');
+
+select ename,dno
+from emp
+where dno=(select dno
+from emp
+where ename='jones');
+
+select ename,job
+from emp
+where job=(select job
+from emp
+where ename='james');
+
+select ename,sal*12,empno
+from emp
+where sal*12>(select sal*12
+from emp
+where ename='ward');
+
+select ename,hiredate
+from emp
+where hiredate<(select hiredate
+from emp
+where ename='scott');
+
+select ename,hiredate
+from emp
+where hiredate>(select hiredate
+from emp
+where job='president');
+
+select ename,sal
+from emp
+where sal<(select sal
+from emp
+where empno='7839');
+
+select *
+from emp
+where hiredate<(select hiredate
+from emp
+where ename='miller');
+
+select ename
+from emp
+where ename>(select ename
+from emp
+where ename='allen');
+
+select  ename,sal
+from emp
+where sal>(select sal
+from emp
+where ename='miller') and sal<(select sal
+from emp
+where ename='allen');
+
+select *
+from emp
+where dno=20 and job=(select job
+from emp
+where ename='smith');
+
+select*
+from emp
+where job='manager' and dno=(select dno
+from emp
+where ename='turner');
+
+select ename,hiredate
+from emp
+where hiredate>1980 and hiredate=(select hiredate
+from emp
+where ename='king');
+
+select ename,sal
+from emp
+where sal<3500 and sal>(select sal
+from emp
+where ename='blake');
+
+select *
+from emp
+where sal>(select sal
+from emp
+where ename='scott' and sal<(select sal 
+from emp
+ where ename='king'));
+ 
+ 
+ select ename,dno
+ from emp
+ where ename like 'A%' and dno=(select dno
+ from emp
+ where ename='blake');
+ 
+ select ename,comm
+ from emp
+ where comm is not null and job=(select job
+ from emp
+ where ename='smith');
+ 
+ select *
+ from emp
+ where job='clerk' and dno=(select dno
+ from emp
+ where ename='turner');
+ 
+ select ename,sal,job
+ from emp
+ where sal*12>(select sal*12 
+ from emp
+ where ename='smith') and sal*12<(select sal*12
+ from emp
+ where ename='king');
+ 
+ -- waqtd dname of allen
+ 
+ select d_name
+ from dept
+ where deptno=(select dno
+ from emp
+ where ename='allen');
+ 
+ -- waqtd enames working in accounting dept??
+ 
+ select ename
+ from emp
+ where dno=(select deptno
+ from dept
+ where d_name='accoumting');
+ 
+ 
+ select d_name
+ from dept
+ where deptno=(select dno
+ from emp
+ where ename='smith');
+ 
+ select d_name
+ from dept
+ where location=(select location
+ from emp
+ where ename='king');
+ 
+ select location
+ from dept
+ where location=(select location
+ from emp
+ where empno=7902);
+ 
+ select d_name
+ from dept
+ where deptno=(select dno
+ from emp
+ where ename like '%R');
+ 
+ select d_name
+ from dept
+ where d_name=(select d_name
+ from emp
+ where job='president');
+ 
+ select ename
+ from emp
+ where dno=(select deptno
+ from dept
+ where d_name='accoumting');
+ 
+ select ename,sal
+ from emp
+ where dno=(select deptno
+ from dept
+ where location='chicago');
+ 
+ select job
+ from emp
+ where job='salesman';
+ 
+ select ename,eid,dno,city,sal*12 as annual_sal,sal as monthly_sal
+ from emp
+ where  city=('new york');
+ 
+--  select ename
+--  from emp
+--  where ename=(select ename
+--  from dept
+--  where d_name='operation');
+
+select ename
+from emp
+where job is not null;
+
+ select *
+ from emp
+ where dno='turner' and dno=(select dno
+ from emp
+ where ename ='turner') and dno=(select deptno
+ from dept
+ where location='chicago');
+ 
+ select ename
+ from emp
+ where sal>(select sal
+ from emp
+ where ename='scott') and dno=(select deptno
+ from dept
+ where d_name='accounting');
+ 
+ select *
+ from emp
+ where job='manager' and dno=(select deptno
+ from dept
+ where location='chicago');
+ 
+ select ename,sal
+ from emp
+ where ename>'king' and dno=(select deptno
+ from dept
+ where d_name='accounting');
+ 
+ select *
+ from emp e1 join emp e2
+ on e1.mgr=e2.empno;
+ use office;
+ 
+ select e1.ename empname,e2.ename mrgname
+ from emp e1 join emp e2
+ on e1.mgr=e2.empno;
+ 
+  select e1.ename,e1.sal,e2.ename mgrname,e2.sal mgrsal
+ from emp e1 join emp e2
+ on e1.mgr=e2.empno;
+ 
+ select e1.ename,e1.dno,e2.ename,e2.dno
+ from emp e1 join emp e2
+ on e1.mgr=e2.empno and e1.job='clerk';
+ 
+ select e1.ename empname,e2.job mgrjob
+ from emp e1 join emp e2
+ on e1.mgr=e2.empno and e1.job='analyst';
+
+-- cross join
+ select*
+from emp cross join dept;
+
+-- inner join 
+
+
+
+-- ASSIGNMENT ON SELF JOIN :
+
+-- 1.WAQTD NAME OF THE EMPLOYEE AND HIS MANAGER'S NAME IF EMPLOYEE IS WORKING AS CLERK
+select e1.ename,e2.ename
+from emp e1 join emp e2
+on e1.mgr=e2.empno and e1.job='clerk';
+-- 2.WAQTD NAME OF THE EMPLOYEE AND MANAGER'S DESIGNATION IF MANAGER WORKS IN DEPT 10 OR 20 
+select e1.ename,e2.job
+from emp e1 join emp e2
+on e1.mgr=e2.empno and e2.dno in(10,20);
+-- 3.WAQTD NAME OF THE EMP AND MANAGERS SALARY IF EMPLOYEE AND MANAGER BOTH EARN MORE THAN 2300
+select e1.ename,e1.sal,e2.ename,e2.sal
+from emp e1 join emp e2
+on e1.mgr=e2.empno and e1.sal>2300 and e2.sal>2300;
+
+-- 4.WAQTD EMP NAME AND MANAGER'S HIREDATE IF EMPLOYEE WAS HIRED BEFORE1982
+select e1.ename,e2.hiredate 
+from emp e1 join emp e2
+on e1.mgr=e2.empno and e2.hiredate>'1982-12-31';
+-- 5.WAQTD EMP NAME AND MANAGER'S COMM IF EMPLOYEE WORKS AS SALESMAN AND MANAGER 
+-- WORKS IN DEPT 30 
+select e1.ename,e2.comm,e1.dno
+from emp e1 join emp e2
+on e1.mgr=e2.empno and e1.job in ('salesman','manager') and e1.dno=30;
+-- 6.WAQTD EMP NAME AND MANAGER NAME AND THEIR SALARIES IF EMPLOYEE EARNS MORE THAN MANAGER
+select e1.ename,e1.sal,e2.ename,e2.sal
+from emp e1 join emp e2
+on e1.mgr=e2.empno and e2.sal>'maneger';
+-- 7.WAQTD EMP NAME AND HIREDATE , MANAGER NAME AND HIREDATE IF MANAGER WAS HIRED BEFORE EMPLOYEE
+-- 8.WAQTD EMP NAME AND MANAGER NAME IF BOTH ARE WORKING IN SAME JOB
+-- 9.WAQTD EMP NAME AND MANAGER NAME IF MANAGER IS WORKING AS ACTUAL MANAGER
+--  10.WAQTD EMP NAME AND MANAGER NAME ALONG WITH THEIR ANNUAL SALARIES IF EMPLOYEE WORKS IN 
+-- DEPT 10 , 20 AND MANAGER'S SAL IS GREATER THAN EMPLOYEES SALARY . 
+-- 11.WAQTD EMPLOYEE'S NAME AND MANAGER'S DESIGNATION FOR ALL THE EMPLOYEES
+-- 12.WAQTD EMPLOYEE'S NAME AND MANAGER'S SALARY FOR ALL THE EMPLOYEES IF MANAGER'S SALARY ENDS WITH 50
+
+
+use office;
+select ename
+from emp
+union
+select d_name
+from dept;
+ 
+ select dno
+ from emp
+ union
+ select deptno
+ from dept;
+ 
+ select dno
+ from emp
+ intersect
+ select deptno
+ from dept;
+ 
+ select deptno
+ from dept
+ except
+ select dno
+ from emp;
+ 
+ select e.dno
+ from emp e join dept d
+ on e.dno=d.deptno;
+ 
+ select dno
+ from emp
+ intersect
+ select deptno
+ from dept;
+ 
+ -- get all deptno from both tables. (union)
+  select dno
+ from emp
+ union
+ select deptno
+ from dept;
+ 
+ -- get all deptno including duplicates (union all)
+  select dno
+ from emp
+ union all
+ select deptno
+ from dept;
+ 
+ -- get departments whit no employee (except)
+ 
+  select deptno
+ from dept
+ except
+ select dno
+ from emp
+ 
+ 
+ 
